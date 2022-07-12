@@ -32,19 +32,97 @@ function printHobbies(h) {
 
 printHobbies(hobbies);
 
-// pure function
+let multiplier = 1.1;
 
-/// factory function
-
-function calculateVatAmount(tax) {
+function createTaxCalculator(tax) {
   function calculateTax(amount) {
-    return amount * tax;
+    console.log(multiplier);
+    return amount * tax * multiplier;
   }
+
   return calculateTax;
 }
 
-const vatAmount = calculateVatAmount(0.145);
-const companyWage = calculateVatAmount(0.23);
+const calculateVatAmount = createTaxCalculator(0.19);
+const calculateIncomeTaxAmount = createTaxCalculator(0.25);
 
-console.log(vatAmount(100));
-console.log(companyWage(200));
+// multiplier = 1.2;
+
+console.log(calculateVatAmount(100));
+console.log(calculateVatAmount(200));
+
+let userName = 'Abdelaal';
+
+function greetUser() {
+  // let name = 'Anna';
+  console.log('Hi ' + name);
+}
+
+let name = 'Fathi';
+
+userName = 'Moamen';
+
+greetUser();
+
+// function powerOf(x, n) {
+//   let result = 1;
+
+//   for (let i = 0; i < n; i++) {
+//     result *= x;
+//   }
+
+//   return result;
+// }
+
+function powerOf(x, n) {
+  // if (n === 1) {
+  //   return x;
+  // }
+  // return x * powerOf(x, n - 1);
+
+  return n === 1 ? x : x * powerOf(x, n - 1);
+}
+
+console.log(powerOf(2, 3)); // 2 * 2 * 2
+
+const myself = {
+  name: 'abdelaal',
+  friends: [
+    {
+      name: 'Karim',
+      friends: [
+        {
+          name: 'Elsaid',
+          friends: [
+            {
+              name: 'Nada',
+            },
+            {
+              name: 'Fathi',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Julia',
+    },
+  ],
+};
+
+function getFriendNames(person) {
+  const collectedNames = [];
+
+  if (!person.friends) {
+    return [];
+  }
+
+  for (const friend of person.friends) {
+    collectedNames.push(friend.name);
+    collectedNames.push(...getFriendNames(friend));
+  }
+
+  return collectedNames;
+}
+
+console.log(getFriendNames(myself));
